@@ -16,11 +16,13 @@ for line in inputfile:
 
 # make the map which maps colour to what it can be contained by (reverse of above)
 for i in contained_by:
-    possible = list()
-    for j in contained_by:
-        if i in [re.sub("\d+ ", "", k) for k in contained_by[j]]: # I hate this
-            possible.append(j)
-    must_contain[i] = possible
+    i = re.sub("\d+ ", "", i)
+    must_contain[i] = list()
+for i in contained_by:
+    i = re.sub("\d+ ", "", i)
+    for j in contained_by[i]:
+        j = re.sub("\d+ ", "", j)
+        must_contain[j].append(i)
 
 # Part 1
 possible = set()
